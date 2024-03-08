@@ -1,6 +1,5 @@
 <?php
 
-use Core\Entity\BlogPost;
 use Core\Entity\Organization;
 use Zend\Router\Http\Hostname;
 use Zend\Router\Http\Literal;
@@ -18,12 +17,6 @@ return [
                 'module_name' => 'Organizace',
                 'module_icon' => 'fa-hospital-o',
                 'entity_class' => Organization::class,
-            ],
-            'blog' => [
-                'type' => 'module',
-                'module_name' => 'Blog',
-                'module_icon' => 'fa-pencil',
-                'entity_class' => BlogPost::class,
             ],
             'settings' => [
                 'type' => 'link',
@@ -67,7 +60,7 @@ return [
 
         'variables' => [
             'google-analytics' => '',
-            'google-maps-api' => 'AIzaSyBRzYWkyDymkTNoA2SjjRMJpjkVqz9qpm4',
+            'google-maps-api' => '<secret>',
             'environment' => 'develop',
         ],
 
@@ -91,7 +84,7 @@ return [
             'enabled' => true,
             'adapter' => \Core\MailModule\Adapter\Ecomail\EcomailAdapter::class,
             'adapter_params' => [
-                'api_key' => '6256a1e3617c26256a1e3617c3',
+                'api_key' => '<secret>',
             ],
             'system_name' => 'Fuck Cancer - X',
             'system_email' => 'no-reply@fuckcancer.cz',

@@ -108,9 +108,21 @@ www_root/_cache/
 data/DoctrineORMModule/Proxy/
 data/DoctrineORMModule/cache/
 
+.idea/**/*
 
 # Legacy ZF1
 demos/
 extras/documentation
 
 # End of https://www.gitignore.io/api/jetbrains,vim,sass,zendframework
+/.idea/.gitignore
+/.idea/FuckCancerHackaton.iml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/vcs.xml
+/public/.htaccess
+/public/adminaut
+/config/development.config.php
+/www_root
+
+/.idea

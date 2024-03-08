@@ -16,10 +16,10 @@ return [
         'connection' => [
             'orm_default' => [
                 'params' => [
-                    'host' => 'db',
-                    'user' => 'db_user',
-                    'password' => 'db_password',
-                    'dbname' => 'database',
+                    'host' => 'db.hintik.cz',
+                    'user' => 'fuckcancer',
+                    'password' => 'fuckcancer_password_123',
+                    'dbname' => 'FuckCancer',
                 ],
             ],
         ],

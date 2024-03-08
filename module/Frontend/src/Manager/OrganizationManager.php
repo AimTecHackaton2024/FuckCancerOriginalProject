@@ -58,9 +58,33 @@ class OrganizationManager extends AbstractManager
             }
         }
 
+
+       // $this->createOrganisationUser($organization);
+
         $this->entityManager->persist($organization);
         $this->entityManager->flush();
 
         return $organization;
     }
+
+    //fuj, ale celé je to fuj, takže se to v tom fuj ztratí
+    public function createOrganisationUser(Organization $organization)
+    {
+        try {
+            $datetime = new \DateTime();
+            $sql = "INSERT INTO user (email, password, name, role, active, inserted, inserted_by, updated, updated_by, deleted, deleted_by, dtype) 
+                VALUES (:email, :password, :name, 'organization', 1, :inserted, 0, :updated, 0, 0, 0, 0)";
+            $stmt = $this->entityManager->getConnection()->prepare($sql);
+            $stmt->bindValue('email', $organization->getEmail());
+            $stmt->bindValue('password', ''); // Assuming password is empty for now
+            $stmt->bindValue('name', $organization->getTitle());
+            $stmt->bindValue('inserted', $datetime->format('Y-m-d H:i:s')); // Formatting datetime
+            $stmt->bindValue('updated', $datetime->format('Y-m-d H:i:s')); // Formatting datetime
+            $stmt->execute();
+        } catch (\Exception $e) {
+            // Handle exceptions here
+        }
+    }
+
+
 }
