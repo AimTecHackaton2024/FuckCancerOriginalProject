@@ -1,0 +1,105 @@
+header {
+  background: #121D47 url(/img/x-header-background.png) repeat-x;
+  position: relative;
+  z-index: 99;
+
+  .navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    & > .container-fluid {
+      @media (min-width: 1200px) {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    .navbar-brand-container {
+      width: 220px;
+      flex-basis: 220px;
+
+      .navbar-brand {
+        padding: 0;
+
+        img {
+          height: 120px;
+          max-height: 120px;
+
+          @media (max-width: 991px) {
+            height: auto;
+            max-height: 60px;
+          }
+        }
+      }
+    }
+
+    .navbar-collapse {
+      @media (max-width: 991px) {
+        background: #121D47;
+        margin: 0 -12px;
+        padding: 0 12px 12px;
+
+        .btn {
+          margin-top: 30px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        justify-content: center !important;
+      }
+    }
+
+    .navbar-right {
+      width: 220px;
+    }
+
+    .nav-link {
+      padding: 9px 20px;
+      font-family: Montserrat, Verdana, Geneva, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-decoration: none;
+      color: @navLinkText;
+      text-align: center;
+
+      &:hover {
+        color: @navLinkHoverText;
+      }
+
+      &.active, &:active {
+        &, &:hover {
+          color: @navLinkActiveText;
+        }
+      }
+
+      &.btn {
+        color: @white;
+
+        &.active {
+          background: #ffffff;
+          border: none;
+          color: @fcBlue;
+
+          &:hover {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+
+    .navbar-toggler {
+      border: none;
+      outline: none!important;
+      box-shadow: none!important;
+
+      .navbar-toggler-icon {
+        --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 129' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+    }
+  }
+}
+
+.navbar {
+  --bs-navbar-nav-link-padding-x: 20px;
+}

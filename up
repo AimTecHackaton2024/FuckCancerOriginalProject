@@ -1,0 +1,2 @@
+chmod a+x ./docker/data/app/init.sh
+docker-compose up

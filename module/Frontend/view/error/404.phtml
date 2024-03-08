@@ -1,0 +1,11 @@
+<?php if (strpos($this->controller, 'Adminaut\\') !== false) : ?>
+<section class="content">
+    <h2>Požadovaná stránka nebyla nalezena.</h2>
+</section>
+<?php else: ?>
+<div class="notfound-container">
+    <img src="<?php echo $this->basePath("/img/404.png") ?>" alt="404">
+    <br />
+    <a href="<?php $this->url("frontend/map/index") ?>" class="btn btn-primary">Zpět na mapu</a>
+</div>
+<?php endif; ?>

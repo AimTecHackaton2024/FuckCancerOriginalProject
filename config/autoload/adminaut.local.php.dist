@@ -1,0 +1,19 @@
+<?php
+
+return [
+    'adminaut' => [
+        'authAdapter' => [
+            'failedAttemptsToLock' => 5,
+            'secondsToUnlock' => 60,
+            'automaticUnlockDisabled' => false,
+        ],
+        'cookieStorage' => [
+            'cookieName' => 'access-token',
+            'cookiePath' => '/',
+            'cookieDomain' => '',
+            'cookieExpires' => '+1 month',
+            'cookieHttpOnly' => false,
+            'cookieSecure' => false,
+        ],
+    ],
+];

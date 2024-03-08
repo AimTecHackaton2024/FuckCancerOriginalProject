@@ -1,0 +1,117 @@
+<?php
+    /** @var \Core\Entity\OrganizationCategory[] $categories */
+?>
+<section id="map">
+    <div class="map-container"></div>
+    <div class="map-sidebar">
+        <div class="map-sidebar__search-container">
+            <div class="search-box">
+                <div class="input-group">
+                    <input class="form-control form-control-lg" id="search_input" type="search" placeholder="Vyhledat..." aria-label="Vyhledat" autofocus>
+                    <button class="btn" type="button" id="map_clear_search_box" style="display: none;">
+                        <i class="fc-clear-button-icon"></i>
+                    </button>
+                    <button class="btn" type="button" id="map_search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <?php if (!empty($categories)) : ?>
+                <div class="category-list" id="category_list">
+                    <ul>
+                        <?php foreach ($categories as $category) : ?>
+                        <li data-title="<?php echo $category->getTitle() ?>"><i class="fa fa-fw<?php echo (!empty($category->getIcon()) ? sprintf(' fa-%s', $category->getIcon()) : '') ?>"></i> <?php echo $category->getTitle() ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+            </div>
+            
+            <div class="results" id="results_container">
+
+            </div>
+        </div>
+        <div class="map-sidebar__detail-container" id="venue_detail_container">
+            <button class="venue-detail__close">Zavřít</button>
+            <div class="venue-detail__inner"></div>
+        </div>
+    </div>
+</section>
+
+<script type="text/template" id="venue_detail_template">
+    <div class="venue-detail__header">
+        <div class="venue-detail__main-image">
+            {mainPhoto?<a href="{mainPhoto}" data-fancybox="venue-photos">}
+                <img src="{mainPhotoThumbnail}" alt="{title}">
+            {mainPhoto?</a>}
+        </div>
+        <h2 class="venue-detail__title">{title}</h2>
+    </div>
+    <div class="venue-detail__content">
+        <address>
+            <span><i class="fa fa-fw fa-map-marker"></i> <a href="{address_link}" target="_blank">{address}</a></span><br />
+            {homepage?<span><i class="fa fa-fw fa-link"></i> <a href="{homepage}" target="_blank">{homepage}</a></span><br />}
+            {phone?<span><i class="fa fa-fw fa-phone"></i> <a href="tel:{phone}">{phone}</a></span><br />}
+            <span><i class="fa fa-fw fa-envelope"></i> <a href="mailto:{email}" target="_blank">{email}</a></span>
+        </address>
+
+        <ul class="social-links">
+            {facebook?<li><a href="{facebook}" target="_blank" class="social-link social-link--facebook"><i class="fa fa-fw fa-facebook"></i></a></li>}
+            {instagram?<li><a href="{instagram}" target="_blank" class="social-link social-link--instagram"><i class="fa fa-fw fa-instagram"></i></a></li>}
+            {twitter?<li><a href="{twitter}" target="_blank" class="social-link social-link--twitter"><i class="fa fa-fw fa-twitter"></i></a></li>}
+            {youtube?<li><a href="{youtube}" target="_blank" class="social-link social-link--youtube"><i class="fa fa-fw fa-youtube"></i></a></li>}
+            {linkedin?<li><a href="{linkedin}" target="_blank" class="social-link social-link--linkedin"><i class="fab fa-fw fa-linkedin"></i></a></li>}
+        </ul>
+
+        <div class="venue-detail__gallery venue-detail__gallery-layout{photosCount}">
+            {photos#<a href="{url}" data-fancybox="venue-photos" class="venue-detail__gallery-item"><img src="{thumbnail}" alt=""></a>}
+        </div>
+
+
+        <div class="venue-detail__article">{article}</div>
+
+        <?php /*<div class="venue-detail__blog">
+            <h3 class="venue-detail__blog-headline">Blog</h3>
+
+            <div class="venue-detail__blog-item">
+                <a href="#">
+                    <h4 class="venue-detail__blog-item__title">Lore ipsum doloris taky asi ne</h4>
+                    <span class="venue-detail__blog-item__date">12. 6. 2023</span>
+
+                    <p class="venue-detail__blog-item__perex">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam consequuntur culpa distinctio eaque est, fugiat fugit molestias omnis sit velit voluptatem. Consectetur exercitationem hic nemo nobis tenetur voluptas voluptates.</p>
+                </a>
+            </div>
+
+            <div class="venue-detail__blog-item">
+                <a href="#">
+                    <h4 class="venue-detail__blog-item__title">Lore ipsum doloris taky asi ne</h4>
+                    <span class="venue-detail__blog-item__date">12. 6. 2023</span>
+
+                    <p class="venue-detail__blog-item__perex">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam consequuntur culpa distinctio eaque est, fugiat fugit molestias omnis sit velit voluptatem. Consectetur exercitationem hic nemo nobis tenetur voluptas voluptates.</p>
+                </a>
+            </div>
+        </div>*/ ?>
+    </div>
+</script>
+
+<script type="text/template" id="result_item_template">
+    <div class="results-item" data-id="{id}">
+        <h2 class="results-item__title">{title}</h2>
+        <p class="results-item__perex">{perex}</p>
+
+        <address>
+            <span><i class="fa fa-fw fa-map-marker"></i> <a href="{address_link}" target="_blank">{address}</a></span><br />
+            {homepage?<span><i class="fa fa-fw fa-link"></i> <a href="{homepage}" target="_blank">{homepage}</a></span><br />}
+            {phone?<span><i class="fa fa-fw fa-phone"></i> <a href="tel:{phone}">{phone}</a></span><br />}
+        </address>
+    </div>
+</script>
+
+<?php
+$this->inlineScript()
+    ->appendFile($this->basePath('js/template.js'))
+    ->appendFile($this->basePath('js/venues.js'))
+    ->appendFile($this->basePath('js/search.js'))
+    ->appendFile($this->basePath('js/vendor/markerclusterer.js'))
+    ->appendFile($this->basePath('js/map.js') . '?v=20231201')
+    ->appendFile(sprintf('https://maps.googleapis.com/maps/api/js?key=%s&libraries=marker&callback=initMap', $this->config('google/maps/api_key')))
+;

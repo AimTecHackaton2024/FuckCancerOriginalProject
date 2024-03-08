@@ -1,0 +1,32 @@
+{
+    "name": "fuck-cancer/x-fuck-cancer-cz",
+    "description": "Fuck Cancer - Xko",
+    "type": "project",
+    "homepage": "https://x.fuck-cancer.cz/",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.2",
+        "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
+        "zendframework/zend-mvc": "^3.1",
+        "doctrine/migrations": "^1.8",
+        "adminaut/adminaut": "0.45.4",
+        "cloud-solutions/zend-sentry": "^3.7",
+        "massimo-filippi/mail-module": "1.2",
+        "ecomailcz/ecomail": "^1.2",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "zfcampus/zf-development-mode": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "module/Core/src/",
+            "Admin\\": "module/Admin/src/",
+            "Frontend\\": "module/Frontend/src/"
+        }
+    },
+    "extra": [],
+    "scripts": {
+    }
+}

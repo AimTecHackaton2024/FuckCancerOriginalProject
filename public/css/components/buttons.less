@@ -1,0 +1,52 @@
+.btn {
+  border-radius: 17px;
+}
+
+.btn-primary {
+  background: @fcPink;
+  border-color: @fcPink;
+  padding: 9px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 33px;
+
+  &:hover, &:focus, &:active, &:focus:hover {
+    background: @fcBlue !important;
+    border-color: @fcBlue !important;
+    outline: none;
+  }
+}
+
+form [type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  padding: 0.75em 1.6em;
+  margin-bottom: 0;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  border-radius: 0;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  outline: 0;
+  transition: color .3s,background-color .3s,border-color .3s,opacity .3s,box-shadow .3s,-webkit-transform .3s;
+  transition: color .3s,background-color .3s,border-color .3s,opacity .3s,box-shadow .3s,transform .3s;
+  transition: color .3s,background-color .3s,border-color .3s,opacity .3s,box-shadow .3s,transform .3s,-webkit-transform .3s;
+  border: 0 solid #000;
+  background: #202a44;
+  color: #fff;
+
+  &:hover {
+    border-color: #000;
+    background: #fdf5ff;
+    color: #202a44;
+  }
+}

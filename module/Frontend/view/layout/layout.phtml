@@ -1,0 +1,37 @@
+<?php echo $this->doctype() ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php 
+            echo $this->headTitle('Portál Xko - Fuck Cancer')->setSeparator(' - ')->setAutoEscape(false);
+            echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
+
+            echo
+                $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath('favicon.ico')])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&subset=latin-ext&display=swap'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i&subset=latin-ext&display=swap'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&subset=latin-ext&display=swap'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css', 'integrity' => 'sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD', 'crossorigin' => 'anonymous'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css', 'crossorigin' => 'anonymous'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css', 'crossorigin' => 'anonymous'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => $this->basePath('css/x-fuck-cancer.css') . '?v=202312011528'])
+                    ->headLink(['rel' => 'stylesheet', 'href' => $this->basePath('adminaut/themes/adminlte/plugins/iCheck/minimal/minimal.css')])
+                    ->headLink(['rel' => 'stylesheet', 'href' => $this->basePath('adminaut/themes/adminlte/plugins/iCheck/minimal/black.css')])
+            ;
+            echo $this->headScript()
+                ->prependFile('https://code.jquery.com/jquery-3.6.4.min.js', 'text/javascript')
+                ->appendFile('https://kit.fontawesome.com/51f0185097.js', 'text/javascript', ['crossorigin' => 'anonymous'])
+                ->appendFile('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js', 'text/javascript', ['integrity' => 'sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN', 'crossorigin' => 'anonymous'])
+                ->appendFile('https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js', 'text/javascript', ['crossorigin' => 'anonymous'])
+                ->appendFile($this->basePath('adminaut/themes/adminlte/plugins/iCheck/icheck.min.js'))
+            ;
+	?>
+    </head>
+    <body>
+        <?php echo $this->partial('layout/_header.phtml') ?>
+        <?php echo $this->content ?>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<?php
+    /** @var \Frontend\Form\OrganizationAddForm $form */
+
+
+use Zend\Form\Form;
+
+$this->inlineScript()
+    ->appendFile(sprintf('https://maps.googleapis.com/maps/api/js?libraries=places&key=%s', $this->config('google/maps/api_key')))
+    ->appendFile('/js/add-organization.js')
+    ->appendScript('CKEDITOR.config.customConfig = \'/js/ckeditor-config.js\';')
+;
+
+?>
+<section id="add_organization">
+    <div class="container">
+        <h1>Přidat organizaci</h1>
+        <?php echo $this->partial('partials/frontend/flash-messenger.phtml') ?>
+
+        <?php echo $this->form()->openTag($form) . PHP_EOL ?>
+        <?php echo $this->formRow($form->get('title')) ?>
+        <div class="row">
+            <div class="col-md-6"><?php echo $this->formRow($form->get('category')) ?></div>
+            <div class="col-md-6"><?php echo $this->formRow($form->get('tags')) ?></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg"><?php echo $this->formRow($form->get('photoMain')) ?></div>
+            <div class="col-12 col-lg"><?php echo $this->formRow($form->get('photo1')) ?></div>
+            <div class="col-12 col-lg"><?php echo $this->formRow($form->get('photo2')) ?></div>
+            <div class="col-12 col-lg"><?php echo $this->formRow($form->get('photo3')) ?></div>
+            <div class="col-12 col-lg"><?php echo $this->formRow($form->get('photo4')) ?></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?php echo $this->formRow($form->get('officialName')) ?>
+                <?php echo $this->formRow($form->get('companyId')) ?>
+                <?php echo $this->formRow($form->get('email')) ?>
+                <?php echo $this->formRow($form->get('phone')) ?>
+                <?php echo $this->formRow($form->get('street')) ?>
+                <?php echo $this->formRow($form->get('city')) ?>
+                <?php echo $this->formRow($form->get('zip')) ?>
+            </div>
+            <div class="col-md-6">
+                <?php echo $this->formRow($form->get('homepage')) ?>
+                <?php echo $this->formRow($form->get('facebook')) ?>
+                <?php echo $this->formRow($form->get('instagram')) ?>
+                <?php echo $this->formRow($form->get('twitter')) ?>
+                <?php echo $this->formRow($form->get('linkedin')) ?>
+                <?php echo $this->formRow($form->get('youtube')) ?>
+            </div>
+        </div>
+        <?php
+            echo $this->formCollection(
+                (new Form)
+                    ->add($form->get('locationLat'))
+                    ->add($form->get('locationLng'))
+            );
+        ?>
+        <?php echo $this->formRow($form->get('perex')) ?>
+        <?php echo $this->formRow($form->get('article')) ?>
+        <?php echo $this->formRow($form->get('operatingArea')) ?>
+        <hr />
+        <?php echo $this->formRow($form->get('moreVenues')) ?>
+        <?php echo $this->formRow($form->get('notes')) ?>
+        <?php echo $this->formRow($form->get('submit')) ?>
+        <?php echo $this->form()->closeTag() . PHP_EOL ?>
+    </div>
+</section>

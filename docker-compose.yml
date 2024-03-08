@@ -1,0 +1,55 @@
+#
+# Massimo Filippi Docker PHP Template
+# ===================================
+# 2018-09-22
+#
+# Launch devel environment with:
+# docker-compose up
+#
+
+version: '3.3'
+
+services:
+
+  app:
+    image: massimofilippi/php:latest
+    ports:
+     - "80:80"
+    volumes:
+     - .:/var/www/html/
+     - ./docker/data/app/php.ini:/usr/local/etc/php/php.ini
+     - ./docker/data/app/apache.conf:/etc/apache2/sites-available/000-default.conf
+     - ./docker/data/app/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+     - ./docker/data/log/:/var/log/apache2
+    command:
+      - ./docker/data/app/init.sh
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/data/db:/var/lib/mysql
+      # Import all SQL dump files (filenames are imported in alphabetical order)
+      - ./docker/data/db-dump/:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "81:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: database
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+      PMA_USER: db_user
+      PMA_PASSWORD: db_password
+    links:
+      - db

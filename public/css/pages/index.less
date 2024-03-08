@@ -1,0 +1,25 @@
+section#map {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: -@headerHeight;
+  padding-top: @headerHeight;
+}
+
+.map-overlay-underconstruction {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .7);
+
+  h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 42px;
+    color: #fff;
+  }
+}

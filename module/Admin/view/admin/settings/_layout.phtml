@@ -1,0 +1,27 @@
+<?php
+/** @var string $page */
+/** @var string $content */
+?>
+
+<section class="content-header">
+    <h1>Nastavení</h1>
+    <?php echo $this->partial('adminaut/partial/breadcrumbs', ['pages' => [
+        [
+            'title' => 'Settings',
+            'url' => $this->url('adminaut/settings'),
+        ],
+    ]]) ?>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+            <?php echo $this->partial('admin/settings/_navigation.phtml', ['page' => $page]) ?>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+            <?php echo $content ?>
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

@@ -1,0 +1,56 @@
+stages:
+  - deploy
+
+.Deploy (testing):
+  # deploy to testing server
+  stage: deploy
+  environment:
+    name: testing
+    url: https://tst-x-fuck-cancer.do-fry.mfcc.cz/
+  script:
+    - cd /data/projects/fuck-cancer/test/app/
+    - start=$(date +%s)
+    - git stash
+    - git fetch
+    - git checkout $CI_COMMIT_SHA
+    - find data/cache/ -type f -not -name '.gitignore' -delete
+    - docker exec -t fuckcancer-tst composer selfupdate --1
+    - docker exec -t fuckcancer-tst composer install
+    - docker exec -t fuckcancer-tst vendor/bin/doctrine-module mi:mi --no-interaction
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG new $CI_COMMIT_SHA --project $SENTRY_PROJECT --finalize
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG set-commits $CI_COMMIT_SHA --auto
+    - now=$(date +%s)
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG deploys $CI_COMMIT_SHA new --env $CI_ENVIRONMENT_NAME --url $CI_ENVIRONMENT_URL --time $((now-start))
+  only:
+    - develop
+  tags:
+    - do-fry-server
+  variables:
+    GIT_STRATEGY: none
+
+Deploy (production):
+  # deploy to production server
+  stage: deploy
+  environment:
+    name: production
+    url: https://x-fuck-cancer.do-fry.mfcc.cz/
+  script:
+    - cd /data/projects/fuck-cancer/prod/app/
+    - start=$(date +%s)
+    - git stash
+    - git fetch
+    - git checkout $CI_COMMIT_SHA
+    - find data/cache/ -type f -not -name '.gitignore' -delete
+    - docker exec -t fuckcancer composer selfupdate --1
+    - docker exec -t fuckcancer composer install
+    - docker exec -t fuckcancer vendor/bin/doctrine-module mi:mi --no-interaction
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG new $CI_COMMIT_SHA --project $SENTRY_PROJECT --finalize
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG set-commits $CI_COMMIT_SHA --auto
+    - now=$(date +%s)
+    - sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases --org $SENTRY_ORG deploys $CI_COMMIT_SHA new --env $CI_ENVIRONMENT_NAME --url $CI_ENVIRONMENT_URL --time $((now-start))
+  only:
+    - master
+  tags:
+    - do-fry-server
+  variables:
+    GIT_STRATEGY: none

@@ -1,0 +1,138 @@
+/*
+ * Skin: Fuck Cancer - X
+ * ----------
+ */
+
+@import "../../../vendor/almasaeed2010/adminlte/bower_components/bootstrap/less/mixins.less";
+@import "../../../vendor/almasaeed2010/adminlte/bower_components/bootstrap/less/variables.less";
+@import "../../../vendor/almasaeed2010/adminlte/build/less/variables.less";
+@import "../../../vendor/almasaeed2010/adminlte/build/less/mixins.less";
+
+.skin-fuck-cancer-x {
+  //Navbar
+  .main-header {
+    .navbar {
+      .navbar-variant(#c98bdb; #ffffff);
+
+      .sidebar-toggle {
+        position: relative;
+        color: #ffffff;
+
+        &:after {
+          background: rgba(255, 255, 255, .1);
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          width: 100%;
+          z-index: -100;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        &:hover {
+          background-color: #202a44;
+          color: #ffffff;
+
+          &:after {
+            opacity: 1;
+          }
+        }
+      }
+
+      li.user-menu a {
+        color: #ffffff;
+      }
+
+      .nav > li > a:hover,
+      .nav > li > a:active,
+      .nav > li > a:focus,
+      .nav .open > a,
+      .nav .open > a:hover,
+      .nav .open > a:focus,
+      .nav > .active > a {
+        background: #202a44;
+        color: #ffffff;
+      }
+
+      @media (max-width: @screen-header-collapse) {
+        .dropdown-menu {
+          li {
+            &.divider {
+              background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            a {
+              color: #fff;
+
+              &:hover {
+                background: #202a44;
+                color: #ffffff;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    li.user-header {
+      background-color: #c98bdb;
+
+      p {
+        color: #ffffff;
+      }
+    }
+  }
+
+  //Logo
+  .logo {
+    .logo-variant(#ffffff);
+  }
+
+  //Content Header
+  .content-header {
+    background: transparent;
+  }
+
+  //Create the sidebar skin
+  .skin-dark-sidebar(#c98bdb);
+
+  .main-sidebar {
+    background-color: #202A44;
+
+    .sidebar-menu>li.header {
+      background: #202A44;
+    }
+
+    .sidebar-menu>li:hover>a,
+    .sidebar-menu>li.active>a {
+      background: #303e63;
+    }
+  }
+}
+
+.form-horizontal .radio-inline {
+  padding-top: 0!important;
+  padding-left: 30px!important;
+}
+
+#fee_details,
+#transaction_details {
+  th, td {
+    padding: 7px 0;
+  }
+}
+
+#rates_table {
+  th, td {
+    text-align: center;
+  }
+}
+
+.checkbox:after {
+  content: "";
+  display: table;
+  clear: both;
+}

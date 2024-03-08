@@ -1,0 +1,83 @@
+<?php
+
+/** @var \Zend\Form\Form $form */
+$form = $this->form;
+$form->setAttribute('data-doubleClick', true);
+$form->prepare();
+
+/** @var string $primary */
+$primaryFieldValue = isset($elements[$primary]) ? (method_exists($form->getElements()[$primary], 'getListedValue') ? $form->getElements()[$primary]->getListedValue() : $form->getElements()[$primary]->getValue()) : $entity->getId();
+
+$pages = [
+    [
+        'title' => "Settings",
+        'url' => $this->url('adminaut/settings'),
+    ],
+    [
+        'title' => $this->moduleOption->getModuleName(),
+        'url' => $this->url('adminaut/settings/list', [
+            'module_id' => $this->moduleOption->getModuleId(),
+        ]),
+    ],
+    [
+        'title' => $primaryFieldValue,
+        'url' => $this->url('adminaut/settings/edit', [
+            'module_id' => $this->moduleOption->getModuleId(),
+            'entity_id' => $this->entity->getId()
+        ]),
+    ],
+    [
+        'title' => _('Edit'),
+    ],
+];
+
+?>
+<section class="content-header">
+    <h1>
+        Settings
+        <small><?php echo $this->escapeHtml($this->moduleOption->getModuleName()) ?> - <?php echo $this->escapeHtml($primaryFieldValue) ?></small>
+    </h1>
+    <?php echo $this->partial('adminaut/partial/breadcrumbs', ['pages' => $pages]) ?>
+</section>
+
+<section class="content">
+    <?php echo $this->form()->openTag($form); ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="nav-tabs-custom">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><?php echo $this->translate('Edit record', 'adminaut') ?></h3>
+                </div>
+                <div class="tab-content">
+                    <?php echo $this->partial('adminaut/partial/messages') ?>
+                    <?php echo $this->formCollection($form) ?>
+                </div>
+                <div class="box-footer clearfix">
+                    <button type="submit" name="submit" value="save" class="btn btn-primary"><?php echo $this->translate('Save', 'adminaut') ?></button>
+                    <button type="submit" name="submit" value="save-and-continue" class="btn btn-default"><?php echo $this->translate('Save and continue', 'adminaut') ?></button>
+                    <a href="<?php echo $this->url('adminaut/settings/list', ['module_id' => $this->moduleOption->getModuleId()]) ?>" class="btn btn-link">
+                        <?php echo $this->translate('Back to list', 'adminaut') ?>
+                    </a>
+                    <div class="pull-right">
+                        <a href="#"
+                           data-href="<?php echo $this->url('adminaut/settings/delete', ['module_id' => $this->moduleOption->getModuleId(), 'entity_id' => $this->entity->getId()]) ?>"
+                           class="btn btn-sm btn-danger btn-modal-delete" data-toggle="tooltip" data-placement="top" title="<?php echo $this->translate('Delete', 'adminaut') ?>"
+                           data-original-title="<?php echo $this->translate('Delete', 'adminaut') ?>">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <?php foreach ($this->widgets as $widget) { ?>
+                <?php echo $this->widget($widget); ?>
+            <?php } ?>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag() ?>
+</section>
+
+<?php echo $this->partial('adminaut/partial/changeModal', ['formId' => $form->getName()]) ?>
+<?php echo $this->partial('adminaut/partial/deleteModal') ?>

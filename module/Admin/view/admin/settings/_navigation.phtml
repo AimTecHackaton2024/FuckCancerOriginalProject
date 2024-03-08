@@ -1,0 +1,23 @@
+<?php
+/** @var string|null $page */
+?>
+<div class="box box-solid">
+    <div class="box-header with-border">
+        <h3 class="box-title">Nastavení</h3>
+
+        <div class="box-tools">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="box-body no-padding">
+        <ul class="nav nav-pills nav-stacked">
+            <li<?php echo $page === 'organization-categories' ? ' class="active"' : '' ?>>
+                <a href="<?php echo $this->url('adminaut/settings/list', ['module_id' => 'organization-categories']) ?>"><i class="fa fa-sitemap"></i> Kategorie organizací</a>
+            </li>
+            <li<?php echo $page === 'tags' ? ' class="active"' : '' ?>>
+                <a href="<?php echo $this->url('adminaut/settings/list', ['module_id' => 'tags']) ?>"><i class="fa fa-tags"></i> Tagy</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.box-body -->
+</div>

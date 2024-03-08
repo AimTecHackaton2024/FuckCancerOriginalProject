@@ -1,0 +1,37 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-white">
+        <div class="container-fluid">
+            <div class="navbar-brand-container">
+                <a class="navbar-brand" href="<?php echo $this->url('frontend/index') ?>">
+                    <img src="<?php echo $this->basePath('img/x-header-logo.png') ?>" alt="X - F*ck Cancer">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <?php echo $this->navLink('Mapa', 'frontend/index') ?>
+                    </li>
+                    <li class="nav-item">
+                        <?php echo $this->navLink('O portálu X', 'frontend/about') ?>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.fuckcancer.cz/" target="_blank">Fuck Cancer.cz</a>
+                    </li>
+                    <li class="nav-item d-block d-lg-none">
+                        <?php echo $this->navLink('Přidat organizaci', 'frontend/add-organization', ' btn btn-primary') ?>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-right d-none d-lg-block">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <?php echo $this->navLink('Přidat organizaci', 'frontend/add-organization', ' btn btn-primary') ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
